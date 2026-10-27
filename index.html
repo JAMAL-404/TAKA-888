@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#071b17" />
+<title>TAKA 888 | Sports Demo</title>
+<style>
+:root{--bg:#07110f;--panel:#10201c;--panel2:#142923;--green:#16d47b;--green2:#0a9e5a;--text:#f2fff8;--muted:#9ab5a9;--line:#244239;--gold:#f3c969}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:#091a15;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top{max-width:1200px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:950;font-size:24px;letter-spacing:1px}.brand span{color:var(--green)}
+.pill{border:1px solid #356b53;color:#bfffdc;background:#10291f;padding:7px 11px;border-radius:99px;font-size:12px;font-weight:700}
+button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;font-weight:800;background:var(--green);color:#042014}
+button.secondary{background:#1c332b;color:#eafff2;border:1px solid var(--line)}button:active{transform:scale(.98)}
+.wrap{max-width:1200px;margin:auto;padding:18px;display:grid;grid-template-columns:220px minmax(0,1fr) 300px;gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.panel h2{font-size:15px;margin:0;padding:14px;border-bottom:1px solid var(--line)}
+.navitem{display:flex;align-items:center;gap:10px;padding:13px 14px;color:#d8eee2;border-bottom:1px solid #1c332b}.navitem.active{background:#143d2b;color:#7dffb9;font-weight:800}
+.notice{padding:12px 14px;background:#302918;color:#ffe6a1;font-size:12px;border-bottom:1px solid #594824}
+.hero{padding:20px;background:linear-gradient(115deg,#104d32,#10261f 65%,#1a3829);border:1px solid #246343;border-radius:15px;margin-bottom:16px}
+.hero h1{margin:0 0 6px;font-size:clamp(24px,4vw,35px)}.hero p{margin:0;color:#c2e9d2}.hero .tag{display:inline-block;color:#082516;background:var(--green);border-radius:5px;padding:3px 7px;font-size:10px;font-weight:900;margin-bottom:8px}
+.tabs{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.tab{background:#1a3028;color:#b9d4c7}.tab.active{background:var(--green);color:#052116}
+.league{padding:12px 14px;background:#152b23;color:#9fd8b9;font-size:12px;font-weight:800;display:flex;justify-content:space-between}
+.match{padding:14px;border-bottom:1px solid var(--line)}.match:last-child{border-bottom:0}.matchhead{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;margin-bottom:12px}.teams{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.team{font-weight:700}.vs{font-size:11px;color:var(--muted);margin:0 7px}.odds{display:flex;gap:7px;margin-top:12px}.odd{flex:1;background:#203b30;border:1px solid #2c4d3e;color:#eafff2;border-radius:8px;padding:9px 5px;text-align:center;font-weight:800}.odd small{display:block;font-size:10px;color:#a7c6b6;font-weight:500}.odd.selected{border:1px solid var(--green);background:#155d3b;box-shadow:inset 0 0 0 1px var(--green)}
+.sidebody{padding:14px}.muted{color:var(--muted)}.balance{font-size:26px;font-weight:900;color:var(--green)}.small{font-size:12px}.empty{padding:18px;text-align:center;color:var(--muted);font-size:13px}.slipitem{padding:12px;background:#172d24;border:1px solid var(--line);border-radius:10px;margin-bottom:9px}.slipitem strong{display:block;margin-bottom:4px}.stake{width:100%;margin:12px 0;background:#091813;color:white;border:1px solid #355748;padding:12px;border-radius:8px;font-size:16px}.result{background:#0c1b15;padding:10px;border-radius:8px;font-size:13px;display:flex;justify-content:space-between;margin:10px 0}
+footer{max-width:1200px;margin:0 auto;padding:0 18px 25px;color:#78988a;font-size:12px}
+@media(max-width:950px){.wrap{grid-template-columns:190px minmax(0,1fr)}.right{grid-column:1/-1}.right .sidebody{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
+@media(max-width:650px){.top{padding:12px}.brand{font-size:21px}.wrap{display:flex;flex-direction:column;padding:10px;gap:12px}.left{order:2}.center{order:1}.right{order:3}.left .navs{display:grid;grid-template-columns:1fr 1fr}.navitem{padding:10px;font-size:13px}.right .sidebody{display:block}.hero{padding:17px}.match{padding:12px}.odd{font-size:13px}.pill{display:none}}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand">TAKA <span>888</span></div>
+  <div class="pill">DEMO MODE · NO REAL MONEY</div>
+  <button class="secondary" id="resetBtn">Reset demo</button>
+</div></header>
+<div class="notice">Demo only: virtual credits, sample odds, and no deposits, withdrawals, or real-money wagers.</div>
+<div class="wrap">
+  <aside class="panel left">
+    <h2>SPORTS</h2>
+    <div class="navs">
+      <div class="navitem active">⚽ Football</div><div class="navitem">🏏 Cricket</div>
+      <div class="navitem">🎾 Tennis</div><div class="navitem">🏀 Basketball</div>
+      <div class="navitem">🏆 Top matches</div><div class="navitem">📅 Upcoming</div>
+    </div>
+    <div class="sidebody"><p class="muted small">Your demo profile</p><strong>Guest Player</strong><p class="muted small">No account required</p></div>
+  </aside>
+  <main class="center">
+    <section class="hero">
+      <span class="tag">SPORTS DEMO</span>
+      <h1>Every match. One place.</h1>
+      <p>Explore a sample sports interface with virtual credits.</p>
+    </section>
+    <section class="panel">
+      <div class="tabs"><button class="tab active" data-sport="football">⚽ Football</button><button class="tab" data-sport="cricket">🏏 Cricket</button><button class="tab" data-sport="tennis">🎾 Tennis</button></div>
+      <div id="matches"></div>
+    </section>
+  </main>
+  <aside class="panel right">
+    <h2>DEMO WALLET</h2>
+    <div class="sidebody">
+      <div><div class="muted small">Virtual balance</div><div class="balance" id="balance">৳ 10,000</div><p class="muted small">Demo credits only</p></div>
+      <div>
+        <h2 style="padding:0 0 10px;border:0">BET SLIP</h2>
+        <div id="slip"><div class="empty">Choose an odd to add a selection.</div></div>
+        <label class="small muted" for="stake">Virtual stake</label>
+        <input id="stake" class="stake" type="number" min="1" max="10000" value="100" />
+        <div class="result"><span>Potential return</span><strong id="potential">৳ 0</strong></div>
+        <button id="placeBtn" style="width:100%">Place demo bet</button>
+        <p id="message" class="small muted" aria-live="polite"></p>
+      </div>
+    </div>
+  </aside>
+</div>
+<footer>TAKA 888 is a fictional demo template. Odds and matches are illustrative, not live data. This demo does not process money or connect to gambling services.</footer>
+<script>
+const data={
+ football:[
+  {league:"INTERNATIONAL · SAMPLE",time:"Today · 19:30",home:"Dhaka United",away:"Chittagong FC",odds:[1.85,3.20,2.75]},
+  {league:"EUROPE · SAMPLE",time:"Today · 21:00",home:"Blue City",away:"Red Athletic",odds:[2.10,3.10,2.45]},
+  {league:"FRIENDLY · SAMPLE",time:"Tomorrow · 18:00",home:"River Town",away:"Hill Rangers",odds:[1.95,3.40,2.60]}
+ ],
+ cricket:[
+  {league:"T20 · SAMPLE",time:"Today · 16:00",home:"Bangladesh XI",away:"Island XI",odds:[1.78,0,2.05]},
+  {league:"LEAGUE · SAMPLE",time:"Tomorrow · 14:30",home:"Capital Strikers",away:"Coastal Kings",odds:[1.92,0,1.88]}
+ ],
+ tennis:[
+  {league:"SINGLES · SAMPLE",time:"Today · 20:00",home:"Player A",away:"Player B",odds:[1.72,0,2.12]},
+  {league:"SINGLES · SAMPLE",time:"Tomorrow · 17:30",home:"Player C",away:"Player D",odds:[2.05,0,1.80]}
+ ]
+};
+let sport="football",selection=null,balance=10000;
+const fmt=n=>"৳ "+Math.round(n).toLocaleString("en-US");
+function renderMatches(){
+ const host=document.getElementById("matches");host.innerHTML="";
+ data[sport].forEach((m,i)=>{
+  const card=document.createElement("div");card.className="match";
+  const labels=sport==="cricket"?["Team 1","Tie","Team 2"]:sport==="tennis"?["Player A","Tie","Player B"]:["1","X","2"];
+  card.innerHTML=`<div class="league"><span>${m.league}</span><span>${sport.toUpperCase()}</span></div><div class="matchhead"><span>${m.time}</span><span>Sample odds</span></div><div class="teams"><div><div class="team">${m.home}</div><div class="team" style="margin-top:8px">${m.away}</div></div><div class="muted small">VS</div></div><div class="odds"></div>`;
+  const odds=card.querySelector(".odds");
+  m.odds.forEach((odd,j)=>{const b=document.createElement("button");b.className="odd";b.disabled=odd===0;b.innerHTML=`<small>${labels[j]}</small>${odd?odd.toFixed(2):"—"}`;if(selection&&selection.sport===sport&&selection.match===i&&selection.index===j)b.classList.add("selected");b.addEventListener("click",()=>{selection={sport,match:i,index:j,odd,team:j===0?m.home:j===2?m.away:"Draw",fixture:m.home+" vs "+m.away};renderMatches();renderSlip();});odds.appendChild(b);});
+  host.appendChild(card);
+ });
+}
+function renderSlip(){
+ const host=document.getElementById("slip");
+ if(!selection){host.innerHTML='<div class="empty">Choose an odd to add a selection.</div>';document.getElementById("potential").textContent=fmt(0);return;}
+ host.innerHTML=`<div class="slipitem"><strong>${selection.fixture}</strong><span class="muted small">${selection.team} · ${selection.sport}</span><div style="margin-top:8px;font-weight:900;color:var(--green)">Odds ${selection.odd.toFixed(2)}</div><button class="secondary" id="removeBtn" style="margin-top:9px;padding:6px 9px">Remove</button></div>`;
+ document.getElementById("removeBtn").onclick=()=>{selection=null;renderMatches();renderSlip();};
+ calc();
+}
+function calc(){const s=Math.max(0,Number(document.getElementById("stake").value)||0);document.getElementById("potential").textContent=selection?fmt(s*selection.odd):fmt(0);}
+document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{sport=btn.dataset.sport;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===btn));selection=null;renderMatches();renderSlip();document.getElementById("message").textContent="";}));
+document.getElementById("stake").addEventListener("input",calc);
+document.getElementById("placeBtn").addEventListener("click",()=>{
+ const msg=document.getElementById("message");const stake=Number(document.getElementById("stake").value);
+ if(!selection){msg.textContent="Choose a sample odd first.";return;}
+ if(!Number.isFinite(stake)||stake<=0){msg.textContent="Enter a valid virtual stake.";return;}
+ if(stake>balance){msg.textContent="Not enough demo credits. Reset the demo to restore the balance.";return;}
+ balance-=stake;document.getElementById("balance").textContent=fmt(balance);
+ msg.textContent=`Demo bet placed: ${fmt(stake)} virtual credits on ${selection.team}. No real money was used.`;
+ selection=null;renderMatches();renderSlip();
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{balance=10000;selection=null;document.getElementById("balance").textContent=fmt(balance);document.getElementById("stake").value=100;document.getElementById("message").textContent="Demo reset. Virtual balance restored.";renderMatches();renderSlip();});
+renderMatches();renderSlip();
+</script>
+</body>
+</html>
